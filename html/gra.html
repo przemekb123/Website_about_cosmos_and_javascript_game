@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scene i {
+            position: absolute;
+            top: -250px;
+            background: white;
+            animation: animateStars linear infinite;
+        }
+
+        @keyframes animateStars {
+            0%{
+                transform: translateY(0);
+            }
+
+            100%{
+                transform: translateY(100vh);
+            }
+
+        }
+
+        .scene .rocket {
+           position: relative;
+            animation: animate 0.2s ease infinite;;
+        }
+
+        @keyframes animate {
+            0%,100% {
+                transform: translateY(-1.3px);
+            }
+            50% {
+                transform: translateY(1.3px);
+            }
+        }
+
+
+        .scene .rocket::before {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 200px;
+            background: linear-gradient(white, transparent);
+        }
+
+        .scene .rocket::after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 200px;
+            background: linear-gradient(white, transparent);
+            filter: blur(20px);
+        }
+
+        .falling-element {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+        }
+        .Zasady-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            border-radius: 20px;
+        }
+
+        .Zasady-box h1 {
+            margin-bottom: 20px;
+        }
+
+        .Zasady-box button {
+            padding: 18px 50px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .gameover-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            display: none;
+        }
+
+        .gameover-box h1{
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .gameover-box p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .game-over-box button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body style="overflow: hidden">
+<div class="scene">  <!-- scena z *gwiazdami*, rakieta i spadajacymi meteorytami -->
+<div id="falling-element"> <!-- spadajace meteoryty -->
+
+</div>
+    <div class="rocket">
+        <img src="../image/rakieta.png" width="170" height="170">
+    </div>
+
+</div>
+
+<div class="Zasady-box">  <!-- Zasady, ktore pojawiaja sie na poczatku (przynjamiej powinny) -->
+    <h1>Zasady</h1>
+    <p>Unikaj spadajacych meteorytow! Aby poruszac sie rakieta uzywaj strzalek. Powodzenia :)</p>
+    <button id="play-button">Start</button>
+</div>
+
+<div class="gameover-box" id="gameover-box">
+    <h1>Kolizja!</h1>
+    <p>Statek rozbił sie o meteoryt :(</p>
+    <button onclick="restartGame()">Zagraj Ponownie</button>
+</div>
+
+
+<script>
+
+    function stars() {
+        let count = 50;
+        let i = 0;
+        let scene = document.querySelector('.scene');
+
+        while (i < count) {
+            let star = document.createElement('i');
+            let x = Math.floor(Math.random() * window.innerWidth);
+
+            let duration = Math.random() * 7;
+            let h = Math.random() * 30;
+
+            star.style.left = x + 'px';
+            star.style.width = 2 + 'px';
+            star.style.height = h + 'px';
+            star.style.animationDuration = duration + 's';
+
+            scene.appendChild(star);
+            i++;
+        }
+    }
+    stars();
+
+
+
+
+</script>  ->
+<script>
+    var object = document.querySelector('.rocket');
+    var positionX = 0;
+    var positionY = 0;
+    var stepSize = 10;
+
+    function moveObject(direction) {
+        switch (direction) {
+            case "ArrowUp":
+                positionY -= stepSize;
+                break;
+            case "ArrowDown":
+                positionY += stepSize;
+                break;
+            case "ArrowLeft":
+                positionX -= stepSize;
+                break;
+            case "ArrowRight":
+                positionX += stepSize;
+                break;
+        }
+
+        object.style.top = positionY + "px";
+        object.style.left = positionX + "px";
+
+        checkCollision();
+
+    }
+
+    document.addEventListener("keydown", function(event) {
+        moveObject(event.key);
+    });
+</script>  <!-- skrypt do poruszania sie tym czyms *rakieta* na srodku ekranu -->
+<script>
+    var gameStart = false;
+
+        function createFallingElement() {
+        var element = document.createElement("div");
+        element.classList.add("falling-element");
+
+        var randomX = Math.floor(Math.random() * window.innerWidth);
+        element.style.left = randomX + "px";
+
+        var image = document.createElement("img");
+        image.src = "meteoryt.png";
+        image.width = 120;
+        image.height = 120;
+
+        element.appendChild(image);
+        document.body.appendChild(element);
+
+        animateElement(element);
+    }
+
+    var fallingElementIntervalId;
+    var consentBox = document.querySelector('.Zasady-box');
+    var playButton = document.getElementById('play-button')
+
+    var gameInterval;
+    var fallingElementInterval;
+
+    playButton.addEventListener('click', function () {
+        consentBox.style.display = 'none';
+        startGame();
+    });
+
+
+
+
+    function restartGame() {
+        document.getElementById("game-over-box").style.display = "none";
+        startGame();
+    }
+
+    function startGame() {
+        document.getElementById("consent-box").style.display = "none";
+        positionX = 0;
+        positionY = 0;
+        object.style.top = positionY + "px";
+        object.style.left = positionX + "px";
+        gameInterval = setInterval(createFallingElement, 1000);
+    }
+
+    function stopGame() {
+        clearInterval(gameInterval);
+        clearInterval(fallingElementInterval);
+        document.getElementById("game-over-box").style.display = "block";
+    }
+
+    function animateElement(element) {
+        var positionY = -120;
+        var speed = Math.floor(Math.random() * 5) + 2;
+
+        var interval = setInterval(function() {
+        if (positionY >= window.innerHeight) {
+        clearInterval(interval);
+        element.parentNode.removeChild(element);
+    } else {
+        positionY += speed;
+        element.style.top = positionY + "px";
+    }
+    }, 20);
+        stopGame();
+    }
+
+        function checkCollision() {
+        var objectRect = object.getBoundingClientRect();
+        var elements = document.getElementsByClassName("falling-element");
+
+        for (var i = 0; i < elements.length; i++) {
+        var elementRect = elements[i].getBoundingClientRect();
+
+        if (objectRect.left < elementRect.right &&
+        objectRect.right > elementRect.left &&
+        objectRect.top < elementRect.bottom &&
+        objectRect.bottom > elementRect.top) {
+        gameOver();
+        break;
+    }
+    }
+    }
+
+        function gameOver() {
+        clearInterval(intervalId);
+        alert("Game Over");
+        location.reload();
+    }
+
+        document.addEventListener("keydown", function(event) {
+        moveObject(event.key);
+    });
+
+        var intervalId = setInterval(createFallingElement, 1000);
+
+
+
+</script>
+
+
+</body>
+</html>

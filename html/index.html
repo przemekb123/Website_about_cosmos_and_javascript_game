@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Cosm0se</title>
+    <meta name="description" content="Kosmos">
+    <meta name="keywords" content="kosmos,planety,wszechswiat,rakiety,spacex,nasa">
+</head>
+<body style="overflow-x:hidden;">
+    <header>
+        <h1 class="tytul">Cosm<a style="color : red">0</a>se</h1>
+            <img src="../image/logo.png" alt="logo" class="logo">
+            <nav>
+                <div class="menu">
+                <ul>
+
+
+                    <li><a href="#">Planety</a>
+                        <div class="menu2">
+                            <ul>
+                                <li><a href="Merkury.html">Merkury</a></li>
+                                <li><a href="Wenus.html">Wenus</a></li>
+                                <li><a href="Mars.html">Mars</a></li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="Galeria.html">Galeria</a></li>
+
+                <li><a href="Kontakt.html">Kontakt</a></li>
+
+                </ul>
+                </div>
+            </nav>
+    </header>
+
+<main>
+
+
+    <div class="container">
+        <div id="napis">
+        <span class="tekst">W</span>
+        <span class="tekst" style="animation-delay: 0.8s;">i</span>
+        <span class="tekst" style="animation-delay: 1.5s;">t</span>
+        <span class="tekst" style="animation-delay: 2.2s;">a</span>
+        <span class="tekst" style="animation-delay: 2.7s;">j</span>
+            <span class="tekst" style="animation-delay: 2.7s;">&nbsp;w Kosm<a style="color: red">0</a>sie</span>
+            </div>
+        <a3>Zapraszam do podróży po ekscytujacych zagadnieniach dotyczacych naszej galaktyki.
+        <br>Na stronie mozesz znaleźć informacje na temat otaczajacych nas planet i obejrzeć galerie zdjeć.</br>
+            <br>Również masz możliwość zagrania w grę klikając przycisk poniżej.</br>
+        </a3>
+        <button class="przycisk" onclick="location.href='gra.html'">Play </button>
+    </div>
+
+
+</main>
+
+    <footer class="stopka">
+        <div class="container">
+            <div class="x">
+
+                <div class="stopka-col">
+                    <h4>Planety:</h4>
+                    <ul>
+                        <li><a href="Merkury.html">Merkury</a></li>
+                        <li><a href="Wenus.html">Wenus</a></li>
+                        <li><a href="Mars.html">Mars</a></li>
+
+                    </ul>
+                </div>
+                <div class="stopka-col">
+                    <h4>Polecane strony:</h4>
+                    <ul>
+                        <li><a href="https://www.urania.edu.pl/">Urania</a></li>
+                        <li><a href="https://www.pulskosmosu.pl/">Puls kosmosu</a></li>
+                        <li><a href="https://astronet.pl/">AstroNET</a></li>
+
+                    </ul>
+                </div>
+                <div class="stopka-col">
+                    <h4>Kontakt:</h4>
+                    <ul>
+                        <li><a href="#">Przemylaw Baj</a></li>
+                        <li><a href="#">Mail: przemyslawbaj8@gmail.com</a></li>
+                        <li><a href="#">tel: 500600700</a></li>
+                        <li><a href="#">Github</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            var text = document.getElementById('napis');
+            var spans = text.getElementsByTagName('span');
+            for (var i = 0; i < spans.length; i++) {
+                spans[i].style.animationDelay = (0.5 * i) + 's';
+            }
+        };
+    </script>
+</body>
+</html>

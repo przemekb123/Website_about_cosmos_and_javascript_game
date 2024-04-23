@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylePlanety.css">
+    <title>Cosm0se</title>
+    <style>
+
+    </style>
+
+</head>
+<body style="overflow-x:hidden;">
+<header>
+    <a href="index.html"> <h1 class="tytul">Cosm<a style="color : red">0</a>se</h1></a>
+    <img src="../image/logo.png" alt="logo" class="logo">
+    <nav>
+        <div class="menu">
+            <ul>
+
+
+                <li><a href="#">Planety</a>
+                    <div class="menu2">
+                        <ul>
+                            <li><a href="Merkury.html">Merkury</a></li>
+                            <li><a href="Mars.html">Mars</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="Galeria.html">Galeria</a></li>
+
+                <li><a href="Kontakt.html">Kontakt</a></li>
+
+        </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <h8>Kontakt</h8>
+    <div class="containerKontakt">
+    <div class="formularz">
+    <form action="/wyslij" method="post">
+        <label for="imie">Imię:</label>
+        <input type="text" id="imie" name="imie" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="opis">Opis:</label>
+        <textarea id="opis" name="opis" required></textarea>
+
+        <button type="submit">Wyślij</button>
+    </form>
+    </div>
+        <div class="tabela">
+    <table>
+        <caption>Aktualna data</caption>
+        <tr>
+            <th>Dzień</th>
+            <th>Miesiąc</th>
+            <th>Rok</th>
+        </tr>
+        <tr>
+            <td id="day"></td>
+            <td id="month"></td>
+            <td id="year"></td>
+        </tr>
+    </table>
+            </div>
+    </div>
+</main>
+
+<footer class="stopka">
+    <div class="container">
+        <div class="x">
+
+            <div class="stopka-col">
+                <h4>Planety</h4>
+                <ul>
+                    <li><a href="Merkury.html">Merkury</a></li>
+                    <li><a href="Wenus.html">Wenus</a></li>
+                    <li><a href="Mars.html">Mars</a></li>
+
+                </ul>
+            </div>
+            <div class="stopka-col">
+                <h4>Kontakt:</h4>
+                <ul>
+                    <li><a href="#">Przemylaw Baj</a></li>
+                    <li><a href="#">Mail: przemyslawbaj8@gmail.com</a></li>
+                    <li><a href="#">tel: 500600700</a></li>
+                    <li><a href="#">Github</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<script>
+    var date = new Date();
+    document.getElementById("day").textContent = date.getDate();
+    document.getElementById("month").textContent = date.getMonth() + 1;
+    document.getElementById("year").textContent = date.getFullYear();
+</script>
+
+</body>
+</html>

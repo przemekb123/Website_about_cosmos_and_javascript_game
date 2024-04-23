@@ -1,0 +1,12 @@
+function zmienMotyw() {
+
+document.body.classList.toggle("light-mode");
+document.body.classList.toggle("dark-mode");
+
+const icon = document.getElementById("icon");
+if (document.body.classList.contains("light-mode")) {
+icon.src = "ciemne.png";
+} else {
+icon.src = "jasne.png";
+}
+}
